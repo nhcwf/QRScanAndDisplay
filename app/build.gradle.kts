@@ -61,6 +61,9 @@ dependencies {
 
     // Google Play Services Wearable (for phone-watch communication)
     implementation(libs.play.services.wearable)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
