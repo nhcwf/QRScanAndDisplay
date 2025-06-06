@@ -134,7 +134,7 @@ fun CameraPreview(onCodeScanned: (String) -> Unit) {
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
             val preview = Preview.Builder().build().also {
-                it.setSurfaceProvider(previewView?.surfaceProvider)
+                it.surfaceProvider = previewView?.surfaceProvider
             }
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
             val imageAnalyzer = ImageAnalysis.Builder()
