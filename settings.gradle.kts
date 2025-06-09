@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "QRScanAndDisplay"
 include(":app")
+include(":wear")

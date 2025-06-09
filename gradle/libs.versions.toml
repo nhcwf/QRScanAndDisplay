@@ -14,6 +14,10 @@ playServicesWearable = "19.0.0"
 appcompat = "1.7.1"
 material = "1.12.0"
 activity = "1.10.1"
+composeMaterial = "1.2.1"
+composeFoundation = "1.2.1"
+wearToolingPreview = "1.0.0"
+coreSplashscreen = "1.0.1"
 
 [libraries]
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraxVersion" }
@@ -39,6 +43,10 @@ play-services-wearable = { module = "com.google.android.gms:play-services-wearab
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-compose-material = { group = "androidx.wear.compose", name = "compose-material", version.ref = "composeMaterial" }
+androidx-compose-foundation = { group = "androidx.wear.compose", name = "compose-foundation", version.ref = "composeFoundation" }
+androidx-wear-tooling-preview = { group = "androidx.wear", name = "wear-tooling-preview", version.ref = "wearToolingPreview" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
