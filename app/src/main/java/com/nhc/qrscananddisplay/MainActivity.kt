@@ -17,7 +17,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.nhc.qrscananddisplay.ui.theme.QRScanAndDisplayTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() { // No longer implements MessageClient.OnMessageReceivedListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
