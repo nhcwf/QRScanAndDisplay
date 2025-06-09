@@ -1,7 +1,6 @@
 package com.nhc.qrscananddisplay
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -34,21 +33,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.google.android.gms.tasks.Tasks
-import com.google.android.gms.wearable.Wearable
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 import com.nhc.qrscananddisplay.ui.theme.QRScanAndDisplayTheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.nio.charset.StandardCharsets
 import java.util.concurrent.Executors
 
 private const val TAG_ACTIVITY = "Scanner"
-private const val TAG_SEND_DATA = "Scanner_SendData"
 private const val TAG_QRCODE_ANALYZER = "Scanner_QrCodeAnalyzer"
 private const val TAG_CAMERA_PREVIEW = "Scanner_CameraPreview"
 
@@ -65,9 +57,12 @@ class ScannerActivity : ComponentActivity() {
         }
 
     private var hasCameraPermission = mutableStateOf(false)
+    private lateinit var phoneCommunicationManager: PhoneCommunicationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        phoneCommunicationManager = PhoneCommunicationManager(applicationContext)
 
         // Check for permission and request if needed
         when (PackageManager.PERMISSION_GRANTED) {
@@ -90,7 +85,7 @@ class ScannerActivity : ComponentActivity() {
                         ScannerScreen { scannedCode ->
                             // When a code is found, send it to the watch and finish this activity
                             Log.i(TAG_ACTIVITY, "scannedCode: $scannedCode")
-                            sendDataToWatch(this, scannedCode)
+                            phoneCommunicationManager.sendQrCodeToWatch(scannedCode)
                             finish()
                         }
                     }
@@ -195,32 +190,6 @@ class QrCodeAnalyzer(
                 }.addOnCompleteListener {
                     imageProxy.close()
                 }
-        }
-    }
-}
-
-fun sendDataToWatch(context: Context, data: String) {
-    Log.d(TAG_SEND_DATA, "Attempting to send: $data")
-    Toast.makeText(context, "Code Scanned. Sending to watch...", Toast.LENGTH_SHORT).show()
-
-    CoroutineScope(Dispatchers.IO).launch {
-        try {
-            val nodes = Tasks.await(Wearable.getNodeClient(context).connectedNodes)
-            if (nodes.isEmpty()) {
-                Log.e(TAG_SEND_DATA, "No watch connected.")
-                return@launch
-            }
-            nodes.forEach { node ->
-                Log.d(TAG_SEND_DATA, "Sending to node: ${node.displayName}")
-                val path = "/invite-code"
-                val payload = data.toByteArray(StandardCharsets.UTF_8)
-
-                Wearable.getMessageClient(context).sendMessage(node.id, path, payload)
-                    .addOnSuccessListener { Log.d(TAG_SEND_DATA, "Message sent successfully") }
-                    .addOnFailureListener { e -> Log.e(TAG_SEND_DATA, "Message sending failed", e) }
-            }
-        } catch (e: Exception) {
-            Log.e(TAG_SEND_DATA, "Task to get nodes failed", e)
         }
     }
 }

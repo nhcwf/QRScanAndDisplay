@@ -19,6 +19,19 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+//    productFlavors {
+//        create("free") {
+//            dimension = "version"
+//            applicationId = "com.nhc.qrscananddisplay.free"
+//            versionNameSuffix = "-free"
+//        }
+//        create("pro") {
+//            dimension = "version"
+//            applicationId = "com.nhc.qrscananddisplay.pro"
+//            versionNameSuffix = "-pro"
+//        }
+//    }
+
     buildTypes {
         release {
             isMinifyEnabled = false

@@ -14,8 +14,22 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
     }
+
+//    productFlavors {
+//        create("free") {
+//            applicationIdSuffix = ".free"
+//            versionNameSuffix = "-free"
+//            dimension = "version"
+//            buildConfigField("String", "TARGET_PHONE_APP_ID", "\"com.nhc.qrscananddisplay.free\"")
+//        }
+//        create("pro") {
+//            applicationIdSuffix = ".pro"
+//            versionNameSuffix = "-pro"
+//            dimension = "version"
+//            buildConfigField("String", "TARGET_PHONE_APP_ID", "\"com.nhc.qrscananddisplay.pro\"")
+//        }
+//    }
 
     buildTypes {
         release {
@@ -37,7 +51,6 @@ android {
         compose = true
     }
 }
-
 dependencies {
 
     implementation(libs.play.services.wearable)

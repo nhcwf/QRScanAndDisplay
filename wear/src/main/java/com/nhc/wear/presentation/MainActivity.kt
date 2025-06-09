@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
             WearApp(qrCodeData = qrCodeData) {
                 // Trigger sending message via the repository
                 lifecycleScope.launch {
-                    WearableDataLayerRepository.sendStartScannerMessage(applicationContext)
+                    WearableDataLayerRepository.sendStartScannerMessage(applicationContext, "com.nhc.qrscananddisplay")
                 }
             }
         }
