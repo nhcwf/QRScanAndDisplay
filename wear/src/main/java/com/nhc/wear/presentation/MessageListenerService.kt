@@ -1,6 +1,7 @@
 package com.nhc.wear.presentation
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.util.Log
 import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.WearableListenerService
@@ -20,12 +21,6 @@ class MessageListenerService : WearableListenerService() {
 
             val receivedData = String(messageEvent.data, StandardCharsets.UTF_8)
             Log.d("MessageListenerService", "Invite Code Received: $receivedData")
-
-            val intent = Intent(ACTION_CODE_RECEIVED).apply {
-                putExtra(EXTRA_CODE, receivedData)
-            }
-
-            startActivity(intent)
         }
     }
 

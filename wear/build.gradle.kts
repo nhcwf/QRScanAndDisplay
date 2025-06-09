@@ -9,8 +9,8 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.nhc.wear"
-        minSdk = 34
+        applicationId = "com.nhc.qrscananddisplay"
+        minSdk = 33
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"

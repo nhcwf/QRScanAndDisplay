@@ -114,13 +114,9 @@ fun ScannerScreen(onCodeScanned: (String) -> Unit) {
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(16.dp)
         )
-        // CameraPreview takes up a large portion of the screen
         CameraPreview(onCodeScanned)
     }
 }
-
-
-// --- All the helper composables and functions now live here ---
 
 @Composable
 fun CameraPreview(onCodeScanned: (String) -> Unit) {
